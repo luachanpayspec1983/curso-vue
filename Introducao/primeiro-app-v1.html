@@ -1,0 +1,25 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+
+<div id="app">          <!-- chamar a função -->
+    <input type="text" v-on:input="alterarTitulo">
+    <p>{{ titulo }}</p>
+</div>
+
+<script>
+    new Vue({
+        //referenciar id
+        el: '#app',
+        //passar data(valor )
+        data: {
+            //titulo(variavel)
+            titulo: 'Usando VueJS!'
+        },
+        //methods(funções)
+        methods: {
+            //nome da função
+            alterarTitulo(event) {
+                this.titulo = event.target.value
+            }
+        },
+    })
+</script>
