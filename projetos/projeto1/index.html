@@ -4,42 +4,56 @@
     <title>Matador de Monstro</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600" rel="stylesheet">
-    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://unpkg.com/vue@2"></script>
 </head>
 <body>
     <div id="app">
         <div class="panel scores">
-            <div class="score">
+            <div class="score me">
                 <img src="naruto.jpg" >
                 <div class="life-bar">
-                    <div class="life"></div>
+                    <div class="life" :style="{width: myLife + '%'}"></div>
                 </div>
-                <div></div>
+                <div>
+                    <p>
+                        {{ myLife }}%
+                    </p>
+                </div>
             </div>
-            <div class="score">
-                <h1>Monstro</h1>
+            <div class="score inimigo">
+                <img src="sasuke.png" >
                 <div class="life-bar">
-                    <div class="life"></div>
+                    <div class="life" :style="{width: enemyLife + '%'}"></div>
                 </div>
-                <div></div>
+                <div>
+                    <p>
+                        {{ enemyLife }}%
+                    </p>
+                </div>
             </div>
         </div>
-        <div class="panel result">
-            <div class="win">Você ganhou!!!</div>
-            <div class="lose">Você perdeu!</div>
+        <div class="panel result" v-if="resultado">
+            <div class="win" v-if="resultado == 'win'">Você ganhou!!!</div>
+            <div class="lose" v-else-if="'resultado == lose'">Você perdeu!</div>
+            <div class="new-game" v-else-if="'resultado == tie'">Empate!</div>
         </div>
         <div class="panel buttons">
-            <template>
-                <button class="btn attack">Ataque</button>
-                <button class="btn especial-attack">Ataque Especial</button>
-                <button class="btn heal">Curar</button>
-                <button class="btn give-up">Desistir</button>
+            <template v-if="iniciado">
+                <button class="btn attack" @click="ataque(10, 4)">Ataque</button>
+                <button class="btn especial-attack" @click="ataque(20, 10)">Ataque Especial</button>
+                <button class="btn heal" @click="curar">Curar</button>
+                <button class="btn give-up" onClick="window.location.reload()">Desistir</button>
             </template>
-            <button class="btn new-game">Iniciar Jogo</button>
+            <button v-else-if="!status" class="btn new-game" @click="iniciado = !iniciado">Iniciar Jogo</button>
+            <button v-if="resultado" class="btn new-game" onClick="window.location.reload()">Jogar Novamente</button>
         </div>
-        <div class="panel logs">
-            <ul>
-                <li></li>
+        <div class="panel logs" v-if="status">
+            <ul style="float: left; padding: 10px 10px 10px;">
+                <li class="alert alert-success" role="alert" style="padding: 10px 10px 10px;" v-for="log in logMyLife">{{ log }} de dano ao oponente</li>
+            </ul>
+            <ul style="float: right; padding: 10px 10px 10px;">
+                <li class="alert alert-danger" role="alert" style="padding: 10px 10px 10px;" v-for="logE in logEnLife">{{ logE }} de dano ao oponente</li>
             </ul>
         </div>
     </div>

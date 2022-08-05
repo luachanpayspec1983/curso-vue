@@ -1,5 +1,9 @@
 /* Geral */
 
+img {
+    max-height: 150px;
+}
+
 html {
     font-family: 'Montserrat', sans-serif;
 }
@@ -22,11 +26,20 @@ html {
 }
 
 .score {
+    margin: 20px;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.me {
+    border: 5px solid green;
+}
+
+.inimigo {
+    border: 5px solid red;
 }
 
 .score h1 {
