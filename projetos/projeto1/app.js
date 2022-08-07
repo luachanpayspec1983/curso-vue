@@ -54,6 +54,12 @@ new Vue({
             if(this.myLife >= 100){
                 this.myLife = 100
             }
+            if(this.enemyAtk <= 0 && this.myAtk > 0){
+                this.myLife = 0
+                this.resultado = 'lose'
+                this.iniciado = false
+                this.status = 'end'
+            }
         }
     },
 })
