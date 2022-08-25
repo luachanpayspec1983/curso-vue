@@ -11,6 +11,7 @@ export default {
         randomizeStocks(state) {
             state.stocks.forEach(stock => {
                 stock.price = Math.round(stock.price * (1 + Math.random() - 0.42))
+                stock.qtd = Math.round(stock.qtd * (1 + Math.random() - 0.42))
             })
         }
     },
