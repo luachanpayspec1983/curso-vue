@@ -7,6 +7,9 @@
                     <small>
                         (Preço: {{ stock.price | currency }} | Qtde: {{ stock.quantity }})
                     </small>
+                    <small>
+                        Valor total: {{ stock.price * stock.quantity  | currency }}
+                    </small>
                 </strong>
             </v-card-title>
         </v-card>
