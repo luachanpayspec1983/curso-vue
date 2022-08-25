@@ -1,4 +1,5 @@
 export default {
+    namespaced: true,
     state: {
         produtos: [
             // { id: 1, nome: 'Produto 1', quantidade: 7, preco: 14.55 },
